@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURSED CLICK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brtgrn: #00E091;
+            --ltgrn: #A1FFD0;
+            --bkg: #0E050F;
+            --ylw: #ECF87F;
+            --pnk: #FF949B;
+            --rd: #E43D40;
+        }
+
+        body {
+            font-family: monospace;
+            color: var(--ltgrn);
+            background-color: var(--bkg);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .social-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--ltgrn);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--ylw);
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: var(--ylw);
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+              font-family: "Nosifer", sans-serif;
+
+        }
+
+        .tagline {
+            color: var(--pnk);
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .dungeon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .entry-gate {
+            width: 300px;
+            height: 300px;
+            border: 3px dashed #efefef;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .entry-gate:hover {
+            border-color: var(--ylw);
+            background-color: rgba(0, 224, 145, 0.1);
+        }
+
+        .entry-gate img {
+            width: 150px;
+            height: 150px;
+            filter: invert(70%) sepia(100%) hue-rotate(242deg);
+            margin-bottom: 20px;
+        }
+
+        .token-display {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px dotted var(--brtgrn);
+            text-align: center;
+        }
+
+        .alpha-output {
+            width: 80%;
+            min-height: 200px;
+            border: 2px dotted var(--brtgrn);
+            padding: 20px;
+            margin-top: 30px;
+            background-color: rgba(0, 224, 145, 0.05);
+            position: relative;
+        }
+
+        .alpha-output::before {
+            content: "AI ALPHA";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: var(--bkg);
+            padding: 0 10px;
+            color: var(--ylw);
+            font-size: 12px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--ltgrn);
+            font-size: 12px;
+            padding: 20px;
+            border-top: 1px dotted var(--brtgrn);
+        }
+
+        #leak-meter {
+            width: 100%;
+            height: 10px;
+            background-color: var(--bkg);
+            border: 1px solid var(--brtgrn);
+            margin: 20px 0;
+        }
+
+        #leak-progress {
+            height: 100%;
+            width: 0%;
+            background-color: var(--pnk);
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="social-links">
+        <a href="https://x.com/alpha_dungeon" target="_blank">Twitter</a>
+        <a href="https://x.com/alpha_dungeon" target="_blank">CA</a>
+    </div>
+
+    <h1>CURSED CLICK</h1>
+    <div class="tagline">Enter at your own mental risk</div>
+
+    <div class="dungeon-container">
+        <div id="entry-section">
+            <div class="entry-gate" id="enter-dungeon">
+                <img src="757b12b9f4bf0ae0ebb09db70af0d9dd-removebg-preview.png" alt="Dungeon Gate">
+                <div>Click to Cursed</div>
+                <div style="font-size: 12px; margin-top: 10px;">Cost: 100 $CURSED</div>
+            </div>
+        </div>
+
+        <div id="token-section" class="hidden">
+            <div class="token-display">
+                <h3>Your Dungeon Token</h3>
+                <div id="token-address" style="word-break: break-all; margin: 10px 0; color: var(--ylw);"></div>
+                <div>Balance: <span id="token-balance">1000</span> $CURSED</div>
+            </div>
+
+            <div id="leak-meter">
+                <div id="leak-progress"></div>
+            </div>
+            <div style="text-align: center; font-size: 12px;">Alpha Leak Progress</div>
+        </div>
+
+        <div id="alpha-section" class="hidden">
+            <div class="alpha-output" id="alpha-content">
+                [AI Alpha will appear here]
+            </div>
+            <button id="generate-alpha" style="margin-top: 20px; padding: 10px 20px; background-color: var(--bkg); color: var(--ltgrn); border: 1px solid var(--brtgrn); cursor: pointer;">
+                Generate New Alpha (50 $CURSED)
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        Warning: Content may be real alpha or psyops. Verify all information independently.
+    </footer>
+
+    <script>
+        // Mock Solana token system
+        let tokenBalance = 1000;
+        let alphaHistory = [];
+        
+        // Solana-style wallet address
+        function generateWalletAddress() {
+            const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+            let result = 'DGN';
+            for (let i = 0; i < 12; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result + '...' + chars.charAt(Math.floor(Math.random() * chars.length)) + chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        // Solana memecoin alpha generator
+        function generateAlpha() {
+            const memecoins = ['$CURSED', '$BONK', '$WIF', '$POPCAT', '$SAMO', '$MYRO', '$COQ', '$HORSEMEAT', '$SILLY', '$TREMP'];
+            const actions = ['pumping', 'dumping', 'consolidating', 'forming wedge', 'showing divergence', 'about to break'];
+            const reasons = ['whale accumulation', 'CEX listing soon', 'influencer shilling', 'VC unlock', 'dev wallet activity', 'partnership rumor'];
+            const targets = ['0.01 SOL', '0.001 SOL', 'ATH', 'previous resistance', 'support zone', 'liquidation cluster'];
+            const times = ['next 24h', 'next candle', 'EOD', 'before weekly close', 'pre-market'];
+            
+            const templates = [
+                `🚨 ${memecoins[Math.floor(Math.random() * memecoins.length)]} ${actions[Math.floor(Math.random() * actions.length)]} on ${reasons[Math.floor(Math.random() * reasons.length)]}`,
+                `💎 ${memecoins[Math.floor(Math.random() * memecoins.length)]} showing strength against ${targets[Math.floor(Math.random() * targets.length)]}`,
+                `🔍 ${memecoins[Math.floor(Math.random() * memecoins.length)]} ${actions[Math.floor(Math.random() * actions.length)]} - target ${targets[Math.floor(Math.random() * targets.length)]} ${times[Math.floor(Math.random() * times.length)]}`,
+                `⚠️ ${memecoins[Math.floor(Math.random() * memecoins.length)]} ${actions[Math.floor(Math.random() * actions.length)]} (${reasons[Math.floor(Math.random() * reasons.length)]})`,
+                `🧠 ${memecoins[Math.floor(Math.random() * memecoins.length)]} setup looks identical to ${memecoins[Math.floor(Math.random() * memecoins.length)]} before 10x`,
+                `📈 ${memecoins[Math.floor(Math.random() * memecoins.length)]} ${actions[Math.floor(Math.random() * actions.length)]} - unconfirmed but likely`,
+                `🕵️ ${memecoins[Math.floor(Math.random() * memecoins.length)]} ${actions[Math.floor(Math.random() * actions.length)]} (${reasons[Math.floor(Math.random() * reasons.length)]})`,
+                `🤫 ${memecoins[Math.floor(Math.random() * memecoins.length)]} insider info: ${actions[Math.floor(Math.random() * actions.length)]} ${times[Math.floor(Math.random() * times.length)]}`,
+                `💣 ${memecoins[Math.floor(Math.random() * memecoins.length)]} ${actions[Math.floor(Math.random() * actions.length)]} - ${reasons[Math.floor(Math.random() * reasons.length)]} spotted`
+            ];
+            
+            return templates[Math.floor(Math.random() * templates.length)];
+        }
+
+        // Get current time in crypto trader format
+        function getCurrentTime() {
+            const now = new Date();
+            return `🕒 ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} UTC`;
+        }
+
+        // Update leak meter animation
+        function updateLeakMeter() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    document.getElementById('alpha-content').innerHTML = generateAlpha();
+                    document.getElementById('alpha-timestamp').textContent = getCurrentTime();
+                    alphaHistory.push(document.getElementById('alpha-content').textContent);
+                }
+                document.getElementById('leak-progress').style.width = `${progress}%`;
+            }, 200);
+        }
+
+        // Event listeners
+        document.getElementById('enter-dungeon').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('token-section').classList.remove('hidden');
+            document.getElementById('alpha-section').classList.remove('hidden');
+            document.getElementById('token-address').textContent = generateWalletAddress();
+            
+            // Charge entry fee
+            tokenBalance -= 100;
+            document.getElementById('token-balance').textContent = tokenBalance;
+            
+            // Start initial leak
+            setTimeout(updateLeakMeter, 1000);
+        });
+
+        document.getElementById('generate-alpha').addEventListener('click', function() {
+            if (tokenBalance >= 50) {
+                tokenBalance -= 50;
+                document.getElementById('token-balance').textContent = tokenBalance;
+                document.getElementById('alpha-content').textContent = "[Decrypting new alpha...]";
+                updateLeakMeter();
+            } else {
+                alert("Insufficient $CURSED tokens. Explore more to earn more.");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
+   HTML content. To learn how to do something, just try searching Google for questions like
+   "how to change link color." */
+   
+@font-face {
+font-family:'Geist';
+src: url('../../fonts/geist.ttf') format('truetype'); }
+
+@font-face {
+font-family:'Geist Mono';
+src: url('../../fonts/geistmono.ttf') format('truetype'); }
+
+body {
+  background-color: #0E050F;
+	background-position: top;
+  font-size: 16px;
+  line-height: 26px;
+  font-family: 'Geist Mono', Verdana;
+  margin: 0;
+}
+
+hr {
+  border: solid #8490a0;
+  border-width: 2px 0 0 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.spoiler {
+  background-color: #341948;
+}
+
+.right {
+  float: right;
+  margin-left: 1em;
+}
+.left {
+  float: left;
+  margin-right: 1em;
+}
+.center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+@media only screen and (min-width: 600px) {
+  .small {
+    max-width: 60%;
+    height: auto;
+  }
+}
+.caption {
+  margin-top: 0;
+  font-size: 0.9em;
+  font-style: italic;
+  color: #ECF87F;
+}
+
+a {
+  color: #b19ff9;
+}
+
+a:hover { 
+  color: #FF949B;
+}
+/*yellow*/
+h1, h2, h3, h4, h5 {
+  font-family: 'Geist Mono', monospace;
+  color: #ECF87F;
+}
+
+/*#CONTAINER is the rectangle that contains everything but the background!*/
+#container {
+  margin: 3em auto;
+  width: 90%;
+	max-width: 700px;
+	background-color: #0E050F;
+  color: #A1FFD0; 
+  /*outline-color: #a58cb3;*/
+  /*outline-style: dotted;*/
+  /*outline-width: 4px;*/
+  /*outline-offset: 0;*/
+    border-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAACXUlEQVRYR9VZC27DIAwN7BzbcsFpO8o+F9x6jzUzv8gYgw0dbRqpUgIkfjzsZ0PN8v2xLe4y8At3/CX1N14tuyw0nbNm/PnQ68C4VrigwSSgBh62/F3edGlDgMi9QNsQqCpPidH1NcLvomb+4IhvZ3Q5PtB34B3ITEATw9FvzWbBW8AnuH6WT3kZ/Wv0e/HZgH0fKqS/ZBQDDX4c3D69eILgU/hyK/Z8XwXoHty9QHfSZrtGLVaqPioxOit8LgVaMEomUuIufZR1gylL7xz1KcoXAsoC0CaGFlD3jWdkDwv+HchTTKGzg2XUt3EweQkiS4GTHE14KYW1SgMRl5aYLOqpT9SsdOf5BtwhoCQTZIIsUtM5gMrQHpyEBZJg6plJO+NOnLXMU5SZbGbi5OfaQOmE1Sl0JtCKLmdYDwGUq568iyI/PQRQTmVoRtMAvU3UEyeVgZJCujeqpfFVeVIAbRaykuHe/l4dFevRaVHf2PrgSUf7FoC6DcVxBP+QOsrJkwroA4x6JIXxtKUnZWVtx5BF/RaWnivzphXS41H/BWUl3bdD0/o25+RkHCgsBZcpbrj03ArzUc9u0GpV82A1rSVC1FFRyBsANdiHgOKySwR45QF3eJrndA1FOROV2jOFOtfo9IQu+Q/Yj9vZzI5cPSkFuekBjaNHCtQTg8fHewwUZiDnevGsqdNnWaDMNzhGXQb9lQ6t/muv3wSamIXoXl9Cwjl9wnmsk3o4mLWQmPaTkk6Cpg+/06jneGECQiPkAxSXn+X+h0LykGxcIkfJhIWbs+KsH/1L0JiiXf4ATcshr+QJAWsAAAAASUVORK5CYII=") 14 /  14px / 0 round;
+    border-width:  14px;
+    border-style:  solid;
+}
+
+#content {
+  padding: 10px 5% 20px 5%;
+}
+
+
+/*HEADER STYLE*/
+#header {
+  background-color: #0E050F;
+  padding: 0% 5%;
+  border-color: #00E091;
+  border-style: solid;
+  border-width: 2.5px;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 15px;
+}
+#header ul {
+  list-style-type: none;
+  padding: 0.5em 0;
+  margin: 0;
+}
+#header li {
+  font-size: 1.2em;
+  display: inline-block;
+  margin-right: 1.5em;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
+}
+#header li a {
+  color: #b19ff9;
+  text-decoration: none;
+  background-color: inherit;
+}
+#header li a:hover {
+  color: #FF949B;
+  text-decoration: underline;
+}
+
+/*POST LIST STYLE*/
+#postlistdiv ul {
+  font-size: 1.2em;
+  padding: 0;
+  list-style-type: none;
+}
+#recentpostlistdiv ul {
+  font-size: 1.2em;
+  padding: 0;
+  list-style-type: none;
+}
+.moreposts {
+  font-size: 0.8em;
+  margin-top: 0.2em;
+}
+
+/*NEXT AND PREVIOUS LINKS STYLE*/
+#nextprev {
+  text-align: center;
+  margin-top: 1.4em;
+}
+
+/*DISQUS STYLE*/
+#disqus_thread {
+  margin-top: 1.6em;
+}
+
+/*FOOTER STYLE*/
+#footer {
+  font-size: 0.8em;
+  padding: 0 5% 10px 5%;
+}
